@@ -1,6 +1,9 @@
 package br.com.devdojo.awesome.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class Student {
     private int id;
@@ -12,11 +15,15 @@ public class Student {
 		this.id = id;
 	}
 	public Student(String name) {
-		super();
 		this.name = name;
 	}
+	
+	
 	public Student() {
-	}
+	}	
+	
+//	private static void studentRepository(){
+		
 	public int getId() {
 		return id;
 	}

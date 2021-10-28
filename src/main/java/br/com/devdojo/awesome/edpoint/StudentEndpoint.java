@@ -25,7 +25,7 @@ public class StudentEndpoint {
     }
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity <?> ListAll() {
-        return new ResponseEntity <>(new Student("Deku"), HttpStatus.OK);
+        return new ResponseEntity <>(new Student(0,"Deku"), HttpStatus.OK);
     }
 }
 
