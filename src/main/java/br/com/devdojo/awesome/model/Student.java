@@ -1,8 +1,22 @@
 package br.com.devdojo.awesome.model;
 
+import java.util.List;
+
 public class Student {
     private int id;
 	private String name;
+	public static List<Student> studentList;
+	
+	public Student(int id, String name) {
+		this(name);
+		this.id = id;
+	}
+	public Student(String name) {
+		super();
+		this.name = name;
+	}
+	public Student() {
+	}
 	public int getId() {
 		return id;
 	}
