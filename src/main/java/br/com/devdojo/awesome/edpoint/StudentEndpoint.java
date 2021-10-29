@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.devdojo.awesome.model.Student;
 import br.com.devdojo.awesome.util.DateUtil;
 
-
-
-
 @RestController
 @RequestMapping("students")
 public class StudentEndpoint {
