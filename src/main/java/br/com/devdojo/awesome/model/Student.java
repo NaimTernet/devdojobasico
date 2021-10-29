@@ -32,7 +32,22 @@ public class Student {
     }
 
    public static void studentRepository(){
-        studentList = new ArrayList<>(asList(new Student("Deku"), new Student("Todoroki")));
+        studentList = new ArrayList<>(asList(new Student(1, "Deku"), new Student(2, "Todoroki")));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        return id == student.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 
     public int getId() {
