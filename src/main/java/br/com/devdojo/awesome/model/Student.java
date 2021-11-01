@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 
 @SuppressWarnings("serial")
 @Entity
-@javax.persistence.MappedSuperclass
 public class Student extends AbstractEntity {
   
     private String name;
