@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devdojo.awesome.error.CustomErrorType;
+import br.com.devdojo.awesome.error.ResourceNotFoundException;
 import br.com.devdojo.awesome.model.Student;
 import br.com.devdojo.awesome.repository.StudentRepository;
 
@@ -27,17 +28,21 @@ public class StudentEndpoint {
 	public StudentEndpoint(StudentRepository studentDAO) {
 		this.studentDAO = studentDAO;
 	}
-
 	@GetMapping
 	public ResponseEntity<?> ListAll() {
 		return new ResponseEntity<>(studentDAO.findAll(), HttpStatus.OK);
 	}
+//	@GetMapping(path = "/{id}")
+//	public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
+//		Optional<Student> studentOptional = studentDAO.findById(id);
+//		if (!studentOptional.isPresent())
+//			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
+//		return new ResponseEntity<>(studentOptional.get(), HttpStatus.OK);
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
+		verifyIfStudentExists(id);
 		Optional<Student> studentOptional = studentDAO.findById(id);
-		if (!studentOptional.isPresent())
-			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(studentOptional.get(), HttpStatus.OK);
 	}
 
@@ -51,20 +56,35 @@ public class StudentEndpoint {
 	public ResponseEntity<?> findStudentsByName(@PathVariable String name) {
 		return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
 	}
+//	@DeleteMapping(path = "/{id}")
+//	public ResponseEntity<?> delete(@PathVariable Long id) {
+//		Optional<Student> studentOptional = studentDAO.findById(id);
+//		if (!studentOptional.isPresent())
+//			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
+//		studentDAO.delete(studentOptional.get());
+//		return new ResponseEntity<>(HttpStatus.OK);
 
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
+		verifyIfStudentExists(id);
 		Optional<Student> studentOptional = studentDAO.findById(id);
-		if (!studentOptional.isPresent())
-			return new ResponseEntity<>(new CustomErrorType("Student not found"), HttpStatus.NOT_FOUND);
 		studentDAO.delete(studentOptional.get());
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);	
 	}
-
+//	@PutMapping
+//	public ResponseEntity<?> update(@RequestBody Student student) {
+//		studentDAO.save(student);
+//		return new ResponseEntity<>(HttpStatus.OK);
+	
 	@PutMapping
 	public ResponseEntity<?> update(@RequestBody Student student) {
+		verifyIfStudentExists(student.getId());
 		studentDAO.save(student);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);	
+}
+	private void verifyIfStudentExists(Long id) {
+			if (studentDAO.findById(id).isPresent())
+			throw new ResourceNotFoundException("Student not Found for ID: "+id);
 	}
-
+	
 }
