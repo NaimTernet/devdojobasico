@@ -1,12 +1,12 @@
 package br.com.devdojo.awesome.model;
 
 import javax.persistence.Entity;
-import java.util.Deque;
 
-
+@SuppressWarnings("serial")
 @Entity
+@javax.persistence.MappedSuperclass
 public class Student extends AbstractEntity {
-    //public static Deque<Object>studenty;
+  
     private String name;
 
     public String getName() {

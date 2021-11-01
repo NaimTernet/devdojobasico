@@ -1,12 +1,15 @@
 package br.com.devdojo.awesome.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.MappedSuperclass;
+
+import org.springframework.data.annotation.Id;
+
+@SuppressWarnings("serial")
 @MappedSuperclass
 public class AbstractEntity implements Serializable {
 	@Id
