@@ -18,8 +18,6 @@ import br.com.devdojo.awesome.error.CustomErrorType;
 import br.com.devdojo.awesome.model.Student;
 import br.com.devdojo.awesome.repository.StudentRepository;
 
-
-
 @RestController
 @RequestMapping("students")
 public class StudentEndpoint {
@@ -46,6 +44,12 @@ public class StudentEndpoint {
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Student student) {
 		return new ResponseEntity<>(studentDAO.save(student), HttpStatus.OK);
+	}
+
+	// Metodo para buscar por nome
+	@GetMapping(path = "/findByName/{name}")
+	public ResponseEntity<?> findStudentsByName(@PathVariable String name) {
+		return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
 	}
 
 	@DeleteMapping(path = "/{id}")
