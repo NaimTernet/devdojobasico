@@ -102,6 +102,19 @@ public class ResourceNotFoundDetails extends ErrorDetail {
 	public static Object withTimestamp(long time) {
 		// TODO Auto-generated method stub
 		return null;
+		
 	}
 
+	public ResourceNotFoundDetails build() {
+		ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
+		resourceNotFoundDetails.setDeveloperMessage(developerMessage); 
+		resourceNotFoundDetails.setTitle(title);
+		resourceNotFoundDetails.setDetails(details);
+		resourceNotFoundDetails.setTimestamp(timestamp);
+		resourceNotFoundDetails.setTimestamp(timestamp);
+		resourceNotFoundDetails.setStatus(status);
+		return resourceNotFoundDetails;
+	
+	}
+	
 }
