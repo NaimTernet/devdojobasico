@@ -24,3 +24,5 @@ public class SpringBootEssentialsAdapter extends WebMvcConfigurerAdapter {
 		argumentResolvers.add(phmar);
 	}
 }
+
+
